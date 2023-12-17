@@ -1,10 +1,11 @@
 {
+  "type":"module",
   "name": "realtime-chat",
   "version": "1.0.0",
-  "description": "## Introduction",
-  "main": "index.js",
+  "description": "Realtime chat app",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
