@@ -5,7 +5,8 @@
   "description": "Realtime chat app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start:prod": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
