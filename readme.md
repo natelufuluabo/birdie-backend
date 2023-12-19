@@ -7,3 +7,5 @@ This project was built to complete the coding challenge from https://codingchall
 ## Goal
 
 Refer to https://codingchallenges.fyi/challenges/challenge-realtime-chat for more details regarding the goal of the challenge and what needs to be implemented.
+
+Refer to documentation folder for implementation details.
