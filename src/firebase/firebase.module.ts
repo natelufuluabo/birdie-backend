@@ -1,7 +1,8 @@
-import { Inject, Injectable, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as admin from 'firebase-admin';
-import { app } from 'firebase-admin';
+import { UsersService } from '../users/users.service';
+
 
 const firebaseProvider = {
   provide: 'FIREBASE_APP',
@@ -9,7 +10,7 @@ const firebaseProvider = {
   useFactory: (configService: ConfigService) => {
     const firebaseConfig = {
       type: configService.get<string>('TYPE'),
-      project_id: configService.get<string>('PROJECT_ID'),
+      project_id: configService.get('PROJECT_ID'),
       private_key_id: configService.get<string>('PRIVATE_KEY_ID'),
       private_key: configService.get<string>('PRIVATE_KEY'),
       client_email: configService.get<string>('CLIENT_EMAIL'),
@@ -21,17 +22,21 @@ const firebaseProvider = {
       universe_domain: configService.get<string>('UNIVERSAL_DOMAIN'),
     } as admin.ServiceAccount;
 
-    return admin.initializeApp({
+    const firebaseApp = admin.initializeApp({
       credential: admin.credential.cert(firebaseConfig),
       databaseURL: `https://${firebaseConfig.projectId}.firebaseio.com`,
       storageBucket: `${firebaseConfig.projectId}.appspot.com`,
     });
+
+    const firestore = firebaseApp.firestore();
+
+    return firebaseApp;
   },
 };
 
 @Module({
   imports: [ConfigModule],
-  providers: [firebaseProvider],
-  exports: ['FIREBASE_APP'],
+  providers: [firebaseProvider, UsersService],
+  exports: ['FIREBASE_APP', UsersService],
 })
 export class FirebaseModule {}

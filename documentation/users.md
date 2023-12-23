@@ -16,9 +16,9 @@
   "message": "User registered successfully"
 }
 
-- Failure (4xx Bad Request):
+- Failure (5xx Internal Server Error):
 {
-  "error": "Invalid registration data"
+  "error": "Internal Server Error"
 }
 
 ### User Login
