@@ -29,20 +29,9 @@ const firebaseProvider = {
   },
 };
 
-@Injectable()
-export class FirebaseRepository {
-  #db: FirebaseFirestore.Firestore;
-  #collection: FirebaseFirestore.CollectionReference;
-
-  constructor(@Inject('FIREBASE_APP') private firebaseApp: app.App) {
-    this.#db = firebaseApp.firestore();
-    this.#collection = this.#db.collection('test');
-  }
-}
-
 @Module({
   imports: [ConfigModule],
-  providers: [firebaseProvider, FirebaseRepository],
-  exports: [FirebaseRepository],
+  providers: [firebaseProvider],
+  exports: ['FIREBASE_APP'],
 })
 export class FirebaseModule {}
