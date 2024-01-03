@@ -20,10 +20,4 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     // Handle login logic here
     console.log(`User ${payload.userId} logged in`);
   }
-
-  @SubscribeMessage('logout')
-  handleLogout(client: Socket, payload: { userId: string }) {
-    // Handle login logic here
-    console.log(`User ${payload.userId} logged out`);
-  }
 }
