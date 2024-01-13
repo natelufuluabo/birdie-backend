@@ -10,22 +10,21 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const app = require("../app");
-const serviceAccount = require("./serviceAccount.json");
+const serviceAccount = require("../serviceAccount.json");
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(serviceAccount),
 });
 
 exports.createCustomToken = functions.https.onRequest(
     async (req, res) => {
-        try {
-            const userId = req.body.userId;
-            const customToken = await admin.auth().createCustomToken(userId);
-            console.log(customToken);
-            res.status(200).json({ customToken });
-        } catch (error) {
-            console.log("Error creating custom token", error);
-        }
+      try {
+        const userId = req.body.userId;
+        const customToken = await admin.auth().createCustomToken(userId);
+        res.status(200).json({customToken});
+      } catch (error) {
+        console.log("Error creating custom token", error);
+      }
     },
 );
 
