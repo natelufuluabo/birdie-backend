@@ -21,9 +21,11 @@ exports.createCustomToken = functions.https.onRequest(
       try {
         const userId = req.body.userId;
         const customToken = await admin.auth().createCustomToken(userId);
+        console.log(customToken);
         res.status(200).json({customToken});
       } catch (error) {
         console.log("Error creating custom token", error);
+        res.status(500).json({error: "Internal Server Error"});
       }
     },
 );
